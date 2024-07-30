@@ -1,36 +1,17 @@
 <?php
-
+// CLASE  EN BASE A LOS CONTROLADORES
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [HomeController::class,'index'] );
 
-Route::get('/', function () {
-    return "<center><h1>"."¡Welcome to the Home!"."<br>". " 
-     -- Moreno 23 --"."</h1></center>";
-});
-
-Route::get("/post", function () {
-    return "Aquí se mostraran todos los post...";
-});
-
-// Acceder de forma directa con el nombre asignado 
-Route::get("/post/create/", function () {
-    return "Aquí se mostrara un formulario para crear un post";
-});
+Route::get("/post",[PostController::class, 'index']);
+Route::get("/post/create",[PostController::class, 'create']); // Acceder de forma directa con el nombre asignado 
+Route::get("/post/{post}", [PostController::class,"show"]);// Peticion de forma opcional guardad en la variable pasada como parametro
 
 
-// Peticion de forma opcional guardad en la variable pasada como parametro
-Route::get("/post/{post}", function ($post) { 
-    return "Aquí se mostraran todos los {$post}";
-});
+Route::get('informacion/', [HomeController::class, 'informacion']);
+Route::get('contacto', [HomeController::class,'contacto']);
 
 
